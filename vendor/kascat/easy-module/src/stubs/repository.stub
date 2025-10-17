@@ -1,0 +1,20 @@
+<?php
+
+namespace {{modelNamePlural}};
+
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Class {{modelName}}Repository
+ * Build commom module queries here
+ */
+class {{modelName}}Repository
+{
+    public static function defautFiltersQuery(mixed $filters = []): Builder
+    {
+        return {{modelName}}::query();
+        //    ->when($filters[{{modelName}}::NAME] ?? null, function (Builder $query, $value) {
+        //        $query->where({{modelName}}::NAME, 'like', "%$value%");
+        //    });
+    }
+}

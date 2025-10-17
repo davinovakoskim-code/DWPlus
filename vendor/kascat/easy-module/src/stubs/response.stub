@@ -1,0 +1,20 @@
+<?php
+
+namespace {{modelNamePlural}};
+
+use Illuminate\Http\JsonResponse;
+use Kascat\EasyModule\Core\Response;
+
+/**
+ * Response interceptor
+ * Trait {{modelName}}Response
+ */
+trait {{modelName}}Response
+{
+    use Response;
+
+    public function responseToIndex(mixed $data = [], int $statusCode = 200): JsonResponse
+    {
+        return response()->json($data, $statusCode);
+    }
+}

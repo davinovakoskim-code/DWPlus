@@ -1,0 +1,30 @@
+<?php
+
+namespace {{modelNamePlural}};
+
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class {{modelName}}
+ * @property int         $id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
+class {{modelName}} extends Model
+{
+    const ID = 'id';
+    // Enter other property constants here, example: const NAME = 'name';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    const TABLE = '{{modelNamePluralLowerCase}}';
+
+    protected $table = self::TABLE;
+
+    protected $guarded = [
+        self::ID,
+        self::CREATED_AT,
+        self::UPDATED_AT,
+    ];
+}

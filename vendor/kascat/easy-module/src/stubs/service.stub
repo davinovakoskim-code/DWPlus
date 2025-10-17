@@ -1,0 +1,52 @@
+<?php
+
+namespace {{modelNamePlural}};
+
+use Kascat\EasyModule\Core\Service;
+
+/**
+ * Class {{modelName}}Service
+ */
+class {{modelName}}Service extends Service
+{
+    public function index(array $filters): array
+    {
+        ${{modelNamePluralLowerCase}}Query = {{modelName}}Repository::defautFiltersQuery($filters);
+
+        return self::buildReturn(
+            ${{modelNamePluralLowerCase}}Query
+                ->with(\request(self::WITH_RELATIONSHIP) ?? [])
+                ->paginate(\request(self::PER_PAGE))
+        );
+    }
+
+    public function show({{modelName}} ${{modelNameSingularLowerCase}}): array
+    {
+        return self::buildReturn(
+            ${{modelNameSingularLowerCase}}
+                ->load(\request(self::WITH_RELATIONSHIP) ?? [])
+                ->toArray()
+        );
+    }
+
+    public function store(array $data): array
+    {
+        ${{modelNameSingularLowerCase}} = {{modelName}}::query()->create($data);
+
+        return self::buildReturn(${{modelNameSingularLowerCase}});
+    }
+
+    public function update({{modelName}} ${{modelNameSingularLowerCase}}, array $data): array
+    {
+        ${{modelNameSingularLowerCase}}->update($data);
+
+        return self::buildReturn(${{modelNameSingularLowerCase}});
+    }
+
+    public function destroy({{modelName}} ${{modelNameSingularLowerCase}}): array
+    {
+        ${{modelNameSingularLowerCase}}->delete();
+
+        return self::buildReturn();
+    }
+}

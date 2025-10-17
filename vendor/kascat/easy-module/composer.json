@@ -1,0 +1,25 @@
+{
+    "name": "kascat/easy-module",
+    "description": "Easy modular structure for laravel",
+    "keywords": ["easy module", "module", "modular", "laravel"],
+    "homepage": "https://github.com/kascat",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.2.1",
+    "authors": [
+        {
+            "name": "Fabio Dukievicz",
+            "email": "fabiojd47@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kascat\\EasyModule\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": ">=8.0"
+    },
+    "minimum-stability": "dev"
+}
