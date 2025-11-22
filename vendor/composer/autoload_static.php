@@ -125,6 +125,7 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         ),
         'L' => 
         array (
+            'Locations\\' => 10,
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\Local\\' => 23,
             'League\\Flysystem\\' => 17,
@@ -160,6 +161,9 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         ),
         'E' => 
         array (
+            'Equipments\\' => 11,
+            'EquipmentSubgroups\\' => 19,
+            'EquipmentGroups\\' => 16,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -169,6 +173,7 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Dflydev\\DotAccessData\\' => 22,
+            'Departments\\' => 12,
             'DeepCopy\\' => 9,
             'Database\\Seeders\\' => 17,
             'Database\\Factories\\' => 19,
@@ -422,6 +427,10 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
         ),
+        'Locations\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/locations',
+        ),
         'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
@@ -504,6 +513,18 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
+        'Equipments\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/equipments',
+        ),
+        'EquipmentSubgroups\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/equipment-subgroups',
+        ),
+        'EquipmentGroups\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/equipment-groups',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
@@ -527,6 +548,10 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
+        ),
+        'Departments\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/departments',
         ),
         'DeepCopy\\' => 
         array (
@@ -596,6 +621,7 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\AuthToken' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthToken.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\HasToken' => __DIR__ . '/../..' . '/app/Http/Middleware/HasToken.php',
@@ -613,6 +639,12 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'Auth\\AuthController' => __DIR__ . '/../..' . '/modules/auth/AuthController.php',
+        'Auth\\AuthRequest' => __DIR__ . '/../..' . '/modules/auth/AuthRequest.php',
+        'Auth\\AuthService' => __DIR__ . '/../..' . '/modules/auth/AuthService.php',
+        'Auth\\Enums\\UserRoleEnum' => __DIR__ . '/../..' . '/modules/auth/Enums/UserRoleEnum.php',
+        'Auth\\Enums\\UserStatusEnum' => __DIR__ . '/../..' . '/modules/auth/Enums/UserStatusEnum.php',
+        'Auth\\User' => __DIR__ . '/../..' . '/modules/auth/User.php',
         'Barryvdh\\LaravelIdeHelper\\Alias' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Alias.php',
         'Barryvdh\\LaravelIdeHelper\\Console\\EloquentCommand' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Console/EloquentCommand.php',
         'Barryvdh\\LaravelIdeHelper\\Console\\GeneratorCommand' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Console/GeneratorCommand.php',
@@ -824,6 +856,10 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedListFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedListFilter.php',
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
+        'Departments\\Department' => __DIR__ . '/../..' . '/modules/departments/Department.php',
+        'Departments\\DepartmentController' => __DIR__ . '/../..' . '/modules/departments/DepartmentController.php',
+        'Departments\\DepartmentRequest' => __DIR__ . '/../..' . '/modules/departments/DepartmentRequest.php',
+        'Departments\\DepartmentService' => __DIR__ . '/../..' . '/modules/departments/DepartmentService.php',
         'Dflydev\\DotAccessData\\Data' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/Data.php',
         'Dflydev\\DotAccessData\\DataInterface' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/DataInterface.php',
         'Dflydev\\DotAccessData\\Exception\\DataException' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/Exception/DataException.php',
@@ -1003,6 +1039,18 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'EquipmentGroups\\EquipmentGroup' => __DIR__ . '/../..' . '/modules/equipment-groups/EquipmentGroup.php',
+        'EquipmentGroups\\EquipmentGroupController' => __DIR__ . '/../..' . '/modules/equipment-groups/EquipmentGroupController.php',
+        'EquipmentGroups\\EquipmentGroupRequest' => __DIR__ . '/../..' . '/modules/equipment-groups/EquipmentGroupRequest.php',
+        'EquipmentGroups\\EquipmentGroupService' => __DIR__ . '/../..' . '/modules/equipment-groups/EquipmentGroupService.php',
+        'EquipmentSubgroups\\EquipmentSubgroup' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroup.php',
+        'EquipmentSubgroups\\EquipmentSubgroupController' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroupController.php',
+        'EquipmentSubgroups\\EquipmentSubgroupRequest' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroupRequest.php',
+        'EquipmentSubgroups\\EquipmentSubgroupService' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroupService.php',
+        'Equipments\\Equipment' => __DIR__ . '/../..' . '/modules/equipments/Equipment.php',
+        'Equipments\\EquipmentController' => __DIR__ . '/../..' . '/modules/equipments/EquipmentController.php',
+        'Equipments\\EquipmentRequest' => __DIR__ . '/../..' . '/modules/equipments/EquipmentRequest.php',
+        'Equipments\\EquipmentService' => __DIR__ . '/../..' . '/modules/equipments/EquipmentService.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Inn.php',
@@ -3383,6 +3431,10 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'Locations\\Location' => __DIR__ . '/../..' . '/modules/locations/Location.php',
+        'Locations\\LocationController' => __DIR__ . '/../..' . '/modules/locations/LocationController.php',
+        'Locations\\LocationRequest' => __DIR__ . '/../..' . '/modules/locations/LocationRequest.php',
+        'Locations\\LocationService' => __DIR__ . '/../..' . '/modules/locations/LocationService.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',
