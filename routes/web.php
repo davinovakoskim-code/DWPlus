@@ -1,18 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// Rota da Home que criamos antes
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Home');
 });
+
+// --- NOVA ROTA DE LOGIN ---
+Route::get('/login', function () {
+    // Note o caminho: Auth/Login (pasta/arquivo)
+    return Inertia::render('Auth/Login');
+})->name('login');
+
+use App\Http\Controllers\AuthController;
+
+// Rota que recebe o POST do formulário de login
+Route::post('/login', [AuthController::class, 'store'])->name('login.store');
+
+// Rota de sair
+Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
