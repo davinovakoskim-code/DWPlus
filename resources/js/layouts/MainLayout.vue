@@ -64,7 +64,7 @@ const logout = () => {
           Inventário
         </q-item-label>
 
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple @click="router.get('/equipamentos')" :active="$page.url.startsWith('/equipamentos')">
           <q-item-section avatar>
             <q-icon name="devices" class="text-grey-8"/>
           </q-item-section>
