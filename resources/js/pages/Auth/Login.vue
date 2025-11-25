@@ -9,7 +9,7 @@ const form = useForm({
 const submit = () => {
         
     form.post('/login', {
-        onFinish: () => form.reset('password'), // Limpa a senha se der erro
+        onFinish: () => form.reset('password'), 
     });
 };
 </script>
@@ -27,11 +27,7 @@ const submit = () => {
                     style="height: 65px; max-width: 300px; object-fit: contain;"
                 />
 
-                <div class="nav-links text-grey-8 q-gutter-x-xl">
-                    <span class="cursor-pointer">INÍCIO</span>
-                    <span class="cursor-pointer">SERVIÇOS</span>
-                    <span class="cursor-pointer">ABRIR TICKETS</span>
-                </div>
+                
             </q-card-section>
 
             <q-separator />
@@ -85,24 +81,24 @@ const submit = () => {
 </template>
 
 <style lang="scss" scoped>
-/* CONFIGURAÇÃO DO CARTÃO GIGANTE */
+
 .login-card {
-    width: 94vw;        /* 94% da largura da tela */
-    min-height: 90vh;   /* 90% da altura da tela */
+    width: 94vw;        
+    min-height: 90vh;   
     border-radius: 20px;
     border-color: #d0d0e5;
     background-color: #fafafa;
     max-width: 1800px; 
 }
 
-/* CONFIGURAÇÃO DO "MIOLO" DO FORMULÁRIO (LIMITADOR) */
+
 .form-wrapper {
     width: 100%;
-    max-width: 450px; /* Limita a largura dos inputs */
+    max-width: 450px; 
     margin: 0 auto;
 }
 
-/* Links do Menu Superior */
+
 .nav-links span {
     font-size: 1rem;
     font-weight: 500;
@@ -111,11 +107,11 @@ const submit = () => {
     &:hover { color: #120a45; }
 }
 
-/* Estilização Personalizada dos Inputs */
+
 :deep(.custom-rounded-input) {
     .q-field__control {
-        border-radius: 12px !important; /* Borda arredondada suave */
-        height: 48px; /* Altura compacta */
+        border-radius: 12px !important; 
+        height: 48px; 
     }
     .q-field__control:before {
         border-color: #a5a5c7; 
@@ -132,7 +128,7 @@ const submit = () => {
     }
 }
 
-/* Estilo do Botão */
+
 .rounded-borders-button {
     border-radius: 8px;
 }

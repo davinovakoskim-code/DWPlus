@@ -2,36 +2,49 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\DashboardController;
 
-// Rota da Home que criamos antes
-Route::get('/', function () {
-    return Inertia::render('Home');
+/*
+|--------------------------------------------------------------------------
+| ROTAS PÚBLICAS
+|--------------------------------------------------------------------------
+*/
+Route::middleware('guest')->group(function () {
+    Route::get('/login', function () {
+        return Inertia::render('Auth/Login');
+    })->name('login');
+
+    Route::post('/login', [AuthController::class, 'store'])->name('login.store');
 });
 
-// --- NOVA ROTA DE LOGIN ---
-Route::get('/login', function () {
-    // Note o caminho: Auth/Login (pasta/arquivo)
-    return Inertia::render('Auth/Login');
-})->name('login');
 
-use App\Http\Controllers\AuthController;
+ //ROTAS PROTEGIDAS
 
-// Rota que recebe o POST do formulário de login
-Route::post('/login', [AuthController::class, 'store'])->name('login.store');
+Route::middleware('auth')->group(function () {
 
-// Rota de sair
-Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
-// Rota para a lista de equipamentos
-Route::get('/equipamentos', [App\Http\Controllers\EquipmentController::class, 'index'])->name('equipments.index');
+    // --- HOME / DASHBOARD ---
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
 
-use App\Http\Controllers\EquipmentController;
+    // --- EQUIPAMENTOS ---
+    Route::get('/equipamentos', [EquipmentController::class, 'index'])->name('equipments.index');
+    Route::get('/equipamentos/criar', [EquipmentController::class, 'create'])->name('equipments.create');
+    Route::post('/equipamentos', [EquipmentController::class, 'store'])->name('equipments.store');
+    Route::get('/equipamentos/{equipment}', [EquipmentController::class, 'show'])->name('equipments.show');
+    Route::get('/equipamentos/{equipment}/editar', [EquipmentController::class, 'edit'])->name('equipments.edit');
+    Route::put('/equipamentos/{equipment}', [EquipmentController::class, 'update'])->name('equipments.update');
+    Route::delete('/equipamentos/{equipment}', [EquipmentController::class, 'destroy'])->name('equipments.destroy');
 
-// Listagem (já existia)
-Route::get('/equipamentos', [EquipmentController::class, 'index'])->name('equipments.index');
+    // --- LOCAIS ---
+    Route::get('/locais', [LocationController::class, 'index'])->name('locations.index');
+    Route::get('/locais/criar', [LocationController::class, 'create'])->name('locations.create');
+    Route::post('/locais', [LocationController::class, 'store'])->name('locations.store');
+    Route::get('/locais/{location}/editar', [LocationController::class, 'edit'])->name('locations.edit');
+    Route::put('/locais/{location}', [LocationController::class, 'update'])->name('locations.update');
+    Route::delete('/locais/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 
-// Formulário de Criação (NOVA)
-Route::get('/equipamentos/criar', [EquipmentController::class, 'create'])->name('equipments.create');
-
-// Salvar no Banco (NOVA)
-Route::post('/equipamentos', [EquipmentController::class, 'store'])->name('equipments.store');
+});

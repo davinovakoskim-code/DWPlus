@@ -58,6 +58,16 @@ const logout = () => {
           </q-item-section>
         </q-item>
 
+        <q-item clickable v-ripple @click="router.get('/locais')" :active="$page.url.startsWith('/locais')">
+          <q-item-section avatar>
+            <q-icon name="place" class="text-grey-8"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Locais</q-item-label>
+            <q-item-label caption>Agências e Sedes</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-separator spaced />
 
         <q-item-label header class="text-weight-bold text-uppercase text-grey-7" style="font-size: 0.75rem;">
@@ -69,7 +79,7 @@ const logout = () => {
             <q-icon name="devices" class="text-grey-8"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Equipamentos</q-item-label>
+            <q-item-label>Patrimônios</q-item-label>
             <q-item-label caption>PCs, Notebooks, Monitores</q-item-label>
           </q-item-section>
         </q-item>
@@ -114,6 +124,31 @@ const logout = () => {
           </q-item-section>
           <q-item-section>
             <q-item-label>Colaboradores</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-separator spaced />
+
+        <q-item-label header class="text-weight-bold text-uppercase text-grey-7" style="font-size: 0.75rem;">
+          Suporte
+        </q-item-label>
+
+        <q-item 
+            clickable 
+            v-ripple
+            tag="a"
+            href="https://dwplus.atlassian.net/servicedesk/customer/portal/11/group/24/create/88"
+            target="_blank"
+        >
+          <q-item-section avatar>
+            <q-icon name="confirmation_number" color="negative"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Abrir Tickets</q-item-label>
+            <q-item-label caption>Jira Service Desk</q-item-label>
+          </q-item-section>
+          <q-item-section side>
+            <q-icon name="open_in_new" size="xs" />
           </q-item-section>
         </q-item>
 

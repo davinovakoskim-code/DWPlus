@@ -2,52 +2,48 @@
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 import { useQuasar } from 'quasar';
+import { computed } from 'vue'; 
 
 defineOptions({ layout: MainLayout });
 
 const $q = useQuasar();
 
-// Props vindas do Controller (Listas para os Selects)
-// Por enquanto virão vazias, então coloquei opções manuais de teste
+
 const props = defineProps({
     locations: Array,
     departments: Array,
+    groups: Array,
     subgroups: Array
 });
 
-// Formulário do Inertia
 const form = useForm({
     asset_code: '',
     name: '',
     description: '',
     location_id: null,
     department_id: null,
+    group_id: null,
     subgroup_id: null,
     status: 'Disponível',
     attachment_filename: null,
-    rented: false
+    is_rented: false
 });
 
-// Opções estáticas para testar o visual (enquanto não puxamos do banco)
+
 const statusOptions = ['Disponível', 'Em Uso', 'Manutenção', 'Baixado'];
-// Mockando dados para você ver como fica o Select preenchido
-const mockLocations = [{ label: 'Sala TI (Térreo)', value: 1 }, { label: 'Recepção', value: 2 }];
-const mockDepartments = [{ label: 'Administrativo', value: 1 }, { label: 'Comercial', value: 2 }];
-const mockSubgroups = [{ label: 'Notebooks', value: 1 }, { label: 'Periféricos', value: 2 }];
+
+const filteredSubgroups = computed(() => {
+    if (!form.group_id) return props.subgroups;
+    return props.subgroups.filter(sub => sub.group_id === form.group_id);
+});
 
 const submit = () => {
     form.post('/equipamentos', {
         onSuccess: () => {
-            $q.notify({
-                type: 'positive',
-                message: 'Equipamento cadastrado com sucesso!'
-            });
+            $q.notify({ type: 'positive', message: 'Equipamento cadastrado!' });
         },
         onError: () => {
-            $q.notify({
-                type: 'negative',
-                message: 'Verifique os campos obrigatórios.'
-            });
+            $q.notify({ type: 'negative', message: 'Verifique os campos obrigatórios.' });
         }
     });
 };
@@ -89,7 +85,6 @@ const submit = () => {
                                 v-model="form.name" 
                                 label="Nome do Equipamento *" 
                                 outlined dense
-                                placeholder="Ex: Notebook Dell Latitude 5420"
                                 :error="!!form.errors.name"
                                 :error-message="form.errors.name"
                             >
@@ -102,23 +97,32 @@ const submit = () => {
                                 v-model="form.description" 
                                 label="Descrição Detalhada" 
                                 outlined dense type="textarea" rows="3"
-                                placeholder="Detalhes técnicos, processador, memória, observações..."
                             />
                         </div>
                     </div>
 
                     <q-separator class="q-my-lg" />
 
-                    <div class="text-subtitle1 text-weight-bold text-primary q-mb-md">Localização e Categoria</div>
+                    <div class="text-subtitle1 text-weight-bold text-primary q-mb-md">Classificação</div>
 
                     <div class="row q-col-gutter-md">
                         <div class="col-12 col-md-6">
                             <q-select 
                                 v-model="form.location_id" 
-                                :options="mockLocations"
+                                :options="locations"
                                 label="Local Físico" 
                                 outlined dense emit-value map-options
+                                option-label="name" 
+                                option-value="id"
                             >
+                                <template v-slot:option="scope">
+                                    <q-item v-bind="scope.itemProps">
+                                        <q-item-section>
+                                            <q-item-label>{{ scope.opt.name }}</q-item-label>
+                                            <q-item-label caption>{{ scope.opt.scope }}</q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                </template>
                                 <template v-slot:prepend><q-icon name="place" /></template>
                             </q-select>
                         </div>
@@ -126,9 +130,11 @@ const submit = () => {
                         <div class="col-12 col-md-6">
                             <q-select 
                                 v-model="form.department_id" 
-                                :options="mockDepartments"
-                                label="Setor / Departamento" 
+                                :options="departments"
+                                label="Departamento / Setor" 
                                 outlined dense emit-value map-options
+                                option-label="name"
+                                option-value="id"
                             >
                                 <template v-slot:prepend><q-icon name="business" /></template>
                             </q-select>
@@ -136,10 +142,27 @@ const submit = () => {
 
                         <div class="col-12 col-md-6">
                             <q-select 
-                                v-model="form.subgroup_id" 
-                                :options="mockSubgroups"
-                                label="Grupo / Categoria" 
+                                v-model="form.group_id" 
+                                :options="groups"
+                                label="Grupo" 
                                 outlined dense emit-value map-options
+                                option-label="name"
+                                option-value="id"
+                                @update:model-value="form.subgroup_id = null" 
+                            >
+                                <template v-slot:prepend><q-icon name="folder" /></template>
+                            </q-select>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <q-select 
+                                v-model="form.subgroup_id" 
+                                :options="filteredSubgroups"
+                                label="Subgrupo" 
+                                outlined dense emit-value map-options
+                                option-label="name"
+                                option-value="id"
+                                :disable="!form.group_id"
                             >
                                 <template v-slot:prepend><q-icon name="category" /></template>
                             </q-select>
@@ -159,16 +182,12 @@ const submit = () => {
 
                     <q-separator class="q-my-lg" />
 
-                    <div class="text-subtitle1 text-weight-bold text-primary q-mb-md">Outros</div>
-
                     <div class="row q-col-gutter-md items-center">
                         <div class="col-12 col-md-8">
                             <q-file 
                                 v-model="form.attachment_filename" 
-                                label="Anexar Imagem ou Documento" 
+                                label="Anexar Imagem" 
                                 outlined dense
-                                counter
-                                max-files="1"
                             >
                                 <template v-slot:prepend><q-icon name="attach_file" /></template>
                             </q-file>
@@ -176,8 +195,8 @@ const submit = () => {
 
                         <div class="col-12 col-md-4">
                             <q-toggle 
-                                v-model="form.rented" 
-                                label="Este equipamento é alugado?" 
+                                v-model="form.is_rented" 
+                                label="Equipamento Alugado?" 
                                 color="primary"
                                 left-label
                             />
@@ -196,7 +215,6 @@ const submit = () => {
                         type="submit" 
                         :loading="form.processing"
                         icon="check"
-                        padding="8px 20px"
                     />
                 </q-card-actions>
             </q-card>

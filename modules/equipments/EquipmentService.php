@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Kascat\EasyModule\Core\Service;
+use Kascat\EasyModule\Core\Service; // Supondo que essa lib existe no seu projeto
 use Throwable;
 
 class EquipmentService extends Service
@@ -27,6 +27,7 @@ class EquipmentService extends Service
 
         $query = $this->applyFilters($query, $filters);
 
+        // Verifica se existe paginação
         $perPage = (int) ($filters[self::PER_PAGE] ?? 0);
         if ($perPage > 0) {
             $paginator = $query->paginate($perPage)->appends(Arr::except($filters, [self::PER_PAGE]));
@@ -44,6 +45,7 @@ class EquipmentService extends Service
 
     public function create(array $data): array
     {
+        // Normaliza dados (booleans, etc)
         $data = $this->normalizePayload($data);
 
         DB::beginTransaction();
@@ -51,21 +53,29 @@ class EquipmentService extends Service
         try {
             /** @var Equipment $equipment */
             $equipment = Equipment::create($data);
-            $equipment->load(['subgroup.group', 'department', 'location']);
+            
+            // Carrega relacionamentos para retornar o objeto completo
+            // DICA: Se der erro aqui, é porque algum ID (subgroup, department) não existe no banco
+            if ($equipment->subgroup_id) $equipment->load('subgroup.group');
+            if ($equipment->department_id) $equipment->load('department');
+            if ($equipment->location_id) $equipment->load('location');
 
             DB::commit();
 
             return self::buildReturn($equipment, 201);
+        
         } catch (Throwable $exception) {
             DB::rollBack();
 
+            // É AQUI QUE O ERRO ESTAVA ESCONDIDO!
+            // Ele salvava o erro no log e retornava 500, mas o controller ignorava.
             Log::error('EquipmentService: error while creating equipment', [
                 'message' => $exception->getMessage(),
                 'namespace' => __CLASS__,
             ]);
             report($exception);
 
-            return self::buildReturn(['message' => 'Falha ao cadastrar patrimônio'], 500);
+            return self::buildReturn(['message' => 'Falha ao cadastrar patrimônio: ' . $exception->getMessage()], 500);
         }
     }
 
@@ -78,8 +88,9 @@ class EquipmentService extends Service
         try {
             $equipment->fill($data);
             $equipment->save();
-            $equipment->load(['subgroup.group', 'department', 'location']);
-
+            
+            if ($equipment->subgroup_id) $equipment->load('subgroup.group');
+            
             DB::commit();
 
             return self::buildReturn($equipment);
@@ -157,6 +168,7 @@ class EquipmentService extends Service
 
         return $query;
     }
+    
     private function normalizePayload(array $data): array
     {
         if (array_key_exists(Equipment::RENTED, $data)) {

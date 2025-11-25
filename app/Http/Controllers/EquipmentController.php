@@ -4,60 +4,141 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Equipments\Equipment;        // O Model (para leitura rápida no Index)
-use Equipments\EquipmentService; // O Serviço (para salvar com as regras do seu amigo)
+use Illuminate\Support\Facades\Storage; 
+
+
+use Equipments\Equipment;
+use Equipments\EquipmentService;
+use Locations\Location;
+use Departments\Department;
+use EquipmentGroups\EquipmentGroup;
+use EquipmentSubgroups\EquipmentSubgroup;
 
 class EquipmentController extends Controller
 {
-    // 1. CONSTRUTOR: Injetamos o serviço aqui para poder usar no 'store'
+    
     public function __construct(
         protected EquipmentService $equipmentService
     ) {}
 
-    // 2. TELA: LISTAGEM (Index)
+    
     public function index()
     {
-        // Busca os equipamentos ordenados do mais novo pro antigo
-        $equipments = Equipment::latest()->get(); 
+        
+        $equipments = Equipment::with('location')->latest()->get(); 
 
         return Inertia::render('Equipments/Index', [
             'equipments' => $equipments
         ]);
     }
 
-    // 3. TELA: FORMULÁRIO DE CADASTRO (Create)
     public function create()
     {
         return Inertia::render('Equipments/Create', [
-            // Mandamos arrays vazios por enquanto para os selects não quebrarem.
-            // Futuramente, aqui você vai colocar: Location::all(), Department::all(), etc.
-            'locations' => [],
-            'departments' => [],
-            'subgroups' => []
+            'locations'   => Location::select('id', 'name', 'scope')->orderBy('name')->get(),
+            'departments' => Department::select('id', 'name')->orderBy('name')->get(),
+            'groups'      => EquipmentGroup::select('id', 'name')->orderBy('name')->get(),
+            'subgroups'   => EquipmentSubgroup::select('id', 'name', 'group_id')->orderBy('name')->get(),
         ]);
     }
 
-    // 4. AÇÃO: SALVAR NO BANCO (Store)
+    
     public function store(Request $request)
     {
-        // Validação dos dados vindos do formulário
+        
         $data = $request->validate([
-            'asset_code' => 'required', // Código do patrimônio
-            'name' => 'required',
-            'description' => 'nullable',
-            'location_id' => 'nullable',
-            'department_id' => 'nullable',
-            'subgroup_id' => 'nullable',
-            'status' => 'required',
-            'rented' => 'boolean',
+            'asset_code'          => 'required|max:50|unique:equipments,asset_code',
+            'name'                => 'required|max:180',
+            'description'         => 'nullable',
+            'location_id'         => 'nullable|integer',
+            'department_id'       => 'nullable|integer',
+            'group_id'            => 'nullable|integer',
+            'subgroup_id'         => 'nullable|integer',
+            'status'              => 'required|max:30',
+            'is_rented'           => 'boolean',
             'attachment_filename' => 'nullable'
         ]);
 
-        // MÁGICA: Chamamos o serviço do seu amigo para salvar
-        // Ele pega o array $data e faz o insert no banco
+        
+        if ($request->hasFile('attachment_filename')) {
+            $path = $request->file('attachment_filename')->store('equipments', 'public');
+            $data['attachment_filename'] = $path;
+        }
+
+        
+        $data['created_by'] = auth()->id();
+        $data['updated_by'] = auth()->id();
+
+        
         $this->equipmentService->create($data);
 
-        // Redireciona de volta para a lista de equipamentos
+        
+        return redirect()->route('equipments.index');
+    }
+
+    
+    public function show(Equipment $equipment)
+    {
+        
+        $equipment->load(['location', 'department', 'group', 'subgroup', 'creator']);
+
+        
+        $imageUrl = $equipment->attachment_filename 
+            ? Storage::url($equipment->attachment_filename) 
+            : null;
+
+        return Inertia::render('Equipments/Show', [
+            'equipment' => $equipment,
+            'image_url' => $imageUrl
+        ]);
+    }
+
+    
+    public function edit(Equipment $equipment)
+    {
+        return Inertia::render('Equipments/Edit', [
+            'equipment'   => $equipment,
+            'locations'   => Location::select('id', 'name', 'scope')->orderBy('name')->get(),
+            'departments' => Department::select('id', 'name')->orderBy('name')->get(),
+            'groups'      => EquipmentGroup::select('id', 'name')->orderBy('name')->get(),
+            'subgroups'   => EquipmentSubgroup::select('id', 'name', 'group_id')->orderBy('name')->get(),
+        ]);
+    }
+
+    
+    public function update(Request $request, Equipment $equipment)
+    {
+        
+        $data = $request->validate([
+            'asset_code'          => 'required|max:50|unique:equipments,asset_code,' . $equipment->id,
+            'name'                => 'required|max:180',
+            'description'         => 'nullable',
+            'location_id'         => 'nullable|integer',
+            'department_id'       => 'nullable|integer',
+            'group_id'            => 'nullable|integer',
+            'subgroup_id'         => 'nullable|integer',
+            'status'              => 'required|max:30',
+            'is_rented'           => 'boolean',
+            'attachment_filename' => 'nullable'
+        ]);
+
+        if ($request->hasFile('attachment_filename')) {
+            
+            $data['attachment_filename'] = $request->file('attachment_filename')->store('equipments', 'public');
+        }
+
+        $data['updated_by'] = auth()->id();
+
+        $this->equipmentService->update($equipment, $data);
+
+        return redirect()->route('equipments.index');
+    }
+
+    
+    public function destroy(Equipment $equipment)
+    {
+        $this->equipmentService->delete($equipment);
+
         return redirect()->route('equipments.index');
     }
 }
