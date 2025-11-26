@@ -37,21 +37,56 @@ const deleteItem = (id) => {
         </div>
 
         <q-card class="no-shadow" bordered>
-            <q-table flat :rows="locations" :columns="columns" row-key="id" :pagination="{ rowsPerPage: 10 }">
-                
-                <template v-slot:body-cell-scope="props">
-                    <q-td :props="props">
-                        <q-badge :color="props.row.scope === 'Interno' ? 'blue-7' : 'orange-8'" :label="props.row.scope" />
-                    </q-td>
-                </template>
+            <div class="scroll-container">
+                <q-table
+                    flat
+                    :rows="locations"
+                    :columns="columns"
+                    row-key="id"
+                    :pagination="{ rowsPerPage: 25 }" >
+                    
+                    <template v-slot:body-cell-scope="props">
+                        <q-td :props="props">
+                            <q-badge :color="props.row.scope === 'Interno' ? 'blue-7' : 'orange-8'" :label="props.row.scope" />
+                        </q-td>
+                    </template>
 
-                <template v-slot:body-cell-actions="props">
-                    <q-td :props="props">
-                        <q-btn flat round color="grey-7" icon="edit" size="sm" @click="router.get(`/locais/${props.row.id}/editar`)" />
-                        <q-btn flat round color="negative" icon="delete" size="sm" @click="deleteItem(props.row.id)" />
-                    </q-td>
-                </template>
-            </q-table>
+                    <template v-slot:body-cell-actions="props">
+                        <q-td :props="props">
+                            <q-btn flat round color="grey-7" icon="edit" size="sm" @click="router.get(`/locais/${props.row.id}/editar`)" />
+                            <q-btn flat round color="negative" icon="delete" size="sm" @click="deleteItem(props.row.id)" />
+                        </q-td>
+                    </template>
+                </q-table>
+            </div>
         </q-card>
     </q-page>
 </template>
+
+<style scoped>
+.scroll-container {
+  
+  height: calc(100vh - 200px);
+
+  
+  overflow-y: auto;
+}
+
+
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+</style>

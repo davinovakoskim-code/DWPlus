@@ -124,13 +124,6 @@ const fakeStats = {
                             </q-item-section>
                             <q-item-section>Nova Alocação</q-item-section>
                         </q-item>
-
-                        <q-item clickable v-ripple>
-                            <q-item-section avatar>
-                                <q-avatar color="red-1" text-color="negative" icon="report_problem" />
-                            </q-item-section>
-                            <q-item-section>Reportar Defeito</q-item-section>
-                        </q-item>
                     </q-list>
                 </q-card>
             </div>
