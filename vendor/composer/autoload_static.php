@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit16559e7f8d5570225460a8015849d991
+class ComposerStaticInitc0c4258b6c314e1be1b0b7493e28ff75
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -625,11 +625,16 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
+        'App\\Http\\Controllers\\EquipmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/EquipmentController.php',
+        'App\\Http\\Controllers\\LocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/LocationController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AuthToken' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthToken.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\HandleInertiaRequests' => __DIR__ . '/../..' . '/app/Http/Middleware/HandleInertiaRequests.php',
         'App\\Http\\Middleware\\HasToken' => __DIR__ . '/../..' . '/app/Http/Middleware/HasToken.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -1053,7 +1058,6 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
         'EquipmentSubgroups\\EquipmentSubgroupController' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroupController.php',
         'EquipmentSubgroups\\EquipmentSubgroupRequest' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroupRequest.php',
         'EquipmentSubgroups\\EquipmentSubgroupService' => __DIR__ . '/../..' . '/modules/equipment-subgroups/EquipmentSubgroupService.php',
-        'Equipments\\Equipment' => __DIR__ . '/../..' . '/modules/equipments/Equipment.php',
         'Equipments\\EquipmentController' => __DIR__ . '/../..' . '/modules/equipments/EquipmentController.php',
         'Equipments\\EquipmentRequest' => __DIR__ . '/../..' . '/modules/equipments/EquipmentRequest.php',
         'Equipments\\EquipmentService' => __DIR__ . '/../..' . '/modules/equipments/EquipmentService.php',
@@ -7058,10 +7062,10 @@ class ComposerStaticInit16559e7f8d5570225460a8015849d991
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit16559e7f8d5570225460a8015849d991::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit16559e7f8d5570225460a8015849d991::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit16559e7f8d5570225460a8015849d991::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit16559e7f8d5570225460a8015849d991::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc0c4258b6c314e1be1b0b7493e28ff75::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc0c4258b6c314e1be1b0b7493e28ff75::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc0c4258b6c314e1be1b0b7493e28ff75::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc0c4258b6c314e1be1b0b7493e28ff75::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -6,26 +6,36 @@ defineOptions({ layout: MainLayout });
 
 
 const props = defineProps({
-    stats: Object 
+    stats: Object,
+    recent: Array 
 });
+
+
+const fakeStats = {
+    total: 1250,
+    em_uso: 980,
+    disponivel: 255,
+    manutencao: 15
+};
+
 </script>
 
 <template>
     <q-page class="q-pa-md bg-grey-1">
-        
+
         <div class="q-mb-lg">
             <h1 class="text-h5 text-grey-9 q-my-none text-weight-bold">Dashboard de Ativos</h1>
         </div>
-        
+
         <div class="row q-col-gutter-md q-mb-lg">
-            
+
             <div class="col-12 col-md-3">
                 <q-card class="no-shadow border-left-primary full-height">
                     <q-card-section>
                         <div class="row items-center justify-between">
                             <div>
                                 <div class="text-subtitle2 text-grey-7">Total de Ativos</div>
-                                <div class="text-h3 text-weight-bold text-primary">{{ stats.total }}</div>
+                                <div class="text-h3 text-weight-bold text-primary">{{ fakeStats.total }}</div>
                             </div>
                             <q-icon name="dns" size="40px" class="text-blue-1" />
                         </div>
@@ -39,7 +49,7 @@ const props = defineProps({
                         <div class="row items-center justify-between">
                             <div>
                                 <div class="text-subtitle2 text-grey-7">Em Uso</div>
-                                <div class="text-h3 text-weight-bold text-positive">{{ stats.em_uso }}</div>
+                                <div class="text-h3 text-weight-bold text-positive">{{ fakeStats.em_uso }}</div>
                             </div>
                             <q-icon name="check_circle" size="40px" class="text-green-1" />
                         </div>
@@ -53,7 +63,7 @@ const props = defineProps({
                         <div class="row items-center justify-between">
                             <div>
                                 <div class="text-subtitle2 text-grey-7">Disponíveis</div>
-                                <div class="text-h3 text-weight-bold text-warning">{{ stats.disponivel }}</div>
+                                <div class="text-h3 text-weight-bold text-warning">{{ fakeStats.disponivel }}</div>
                             </div>
                             <q-icon name="inventory_2" size="40px" class="text-orange-1" />
                         </div>
@@ -67,7 +77,7 @@ const props = defineProps({
                         <div class="row items-center justify-between">
                             <div>
                                 <div class="text-subtitle2 text-grey-7">Manutenção</div>
-                                <div class="text-h3 text-weight-bold text-negative">{{ stats.manutencao }}</div>
+                                <div class="text-h3 text-weight-bold text-negative">{{ fakeStats.manutencao }}</div>
                             </div>
                             <q-icon name="build" size="40px" class="text-red-1" />
                         </div>
@@ -77,7 +87,7 @@ const props = defineProps({
         </div>
 
         <div class="row q-col-gutter-md">
-            
+
             <div class="col-12 col-md-8">
                 <q-card class="no-shadow full-height" bordered>
                     <q-card-section>
@@ -100,21 +110,21 @@ const props = defineProps({
                     </q-card-section>
                     <q-separator />
                     <q-list separator>
-                        
+
                         <q-item clickable v-ripple @click="router.get('/equipamentos/criar')">
                             <q-item-section avatar>
                                 <q-avatar color="blue-1" text-color="primary" icon="add" />
                             </q-item-section>
                             <q-item-section>Novo Equipamento</q-item-section>
                         </q-item>
-                        
+
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
                                 <q-avatar color="green-1" text-color="positive" icon="person_add" />
                             </q-item-section>
                             <q-item-section>Nova Alocação</q-item-section>
                         </q-item>
-                        
+
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
                                 <q-avatar color="red-1" text-color="negative" icon="report_problem" />

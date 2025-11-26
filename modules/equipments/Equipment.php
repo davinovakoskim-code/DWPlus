@@ -13,7 +13,7 @@ use App\Models\User;
 
 class Equipment extends Model
 {
-    // Definição das Constantes
+    
     public const ID                  = 'id';
     public const ASSET_CODE          = 'asset_code';
     public const NAME                = 'name';
@@ -26,9 +26,7 @@ class Equipment extends Model
     public const DEPARTMENT_ID       = 'department_id';
     public const LOCATION_ID         = 'location_id';
     
-    // --- AQUI ESTÁ A CORREÇÃO OBRIGATÓRIA ---
-    // Mudamos o nome para RENTED (para o código do amigo aceitar)
-    // Mas o valor é 'is_rented' (para o banco aceitar)
+    
     public const RENTED              = 'is_rented';   
     
     public const ATTACHMENT_NAME     = 'attachment_filename';
@@ -52,14 +50,14 @@ class Equipment extends Model
         self::DEPARTMENT_ID,
         self::GROUP_ID,
         self::SUBGROUP_ID,
-        self::RENTED,           // <--- Usando a constante corrigida
+        self::RENTED,           
         self::ATTACHMENT_NAME,
         self::CREATED_BY,
         self::UPDATED_BY,
     ];
 
     protected $casts = [
-        self::RENTED => 'boolean', // <--- Usando a constante corrigida
+        self::RENTED => 'boolean', 
     ];
 
     // --- RELACIONAMENTOS ---

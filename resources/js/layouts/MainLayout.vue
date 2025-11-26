@@ -84,40 +84,12 @@ const logout = () => {
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="keyboard" class="text-grey-8"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Periféricos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="vpn_key" class="text-grey-8"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Licenças</q-item-label>
-          </q-item-section>
-        </q-item>
-
         <q-separator spaced />
 
         <q-item-label header class="text-weight-bold text-uppercase text-grey-7" style="font-size: 0.75rem;">
           Gestão
         </q-item-label>
-
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="assignment_ind" class="text-grey-8"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Alocações</q-item-label>
-            <q-item-label caption>Termos de Responsabilidade</q-item-label>
-          </q-item-section>
-        </q-item>
-
+        
         <q-item clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="groups" class="text-grey-8"/>
