@@ -8,17 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        
+        // Tabela de Grupos
         Schema::create('equipment_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
         });
 
-        
+        // Tabela de Subgrupos
         Schema::create('equipment_subgroups', function (Blueprint $table) {
             $table->id();
-            
             $table->foreignId('group_id')
                 ->constrained('equipment_groups')
                 ->cascadeOnUpdate()
@@ -27,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        
+        // Tabela de Departamentos
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -35,39 +34,35 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        
+        // Tabela de Locais
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('scope')->nullable(); 
+            $table->string('scope')->nullable();
             $table->timestamps();
         });
 
-        
+        // Tabela de Equipamentos
         Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->string('asset_code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
 
-            
             $table->foreignId('group_id')
-                ->nullable() 
+                ->nullable()
                 ->constrained('equipment_groups')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
-            
 
-           
             $table->foreignId('subgroup_id')
-                ->nullable() 
+                ->nullable()
                 ->constrained('equipment_subgroups')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
 
             $table->string('status')->default('Disponível');
 
-            
             $table->foreignId('department_id')
                 ->nullable()
                 ->constrained('departments')
@@ -79,11 +74,19 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
 
-            $table->boolean('is_rented')->default(false); 
+            $table->boolean('is_rented')->default(false);
             $table->string('attachment_filename')->nullable();
-            $table->foreignId('created_by')->nullable()->constrained('users');
-            $table->foreignId('updated_by')->nullable()->constrained('users');
+
             
+            $table->foreignId('created_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete(); 
+
+            $table->foreignId('updated_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete(); 
 
             $table->timestamps();
         });

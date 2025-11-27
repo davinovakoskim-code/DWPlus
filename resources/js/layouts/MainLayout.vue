@@ -90,14 +90,14 @@ const logout = () => {
           Gestão
         </q-item-label>
         
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="groups" class="text-grey-8"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Colaboradores</q-item-label>
-          </q-item-section>
-        </q-item>
+        <q-item clickable v-ripple @click="router.get('/usuarios')" :active="$page.url.startsWith('/usuarios')">
+  <q-item-section avatar>
+    <q-icon name="groups" class="text-grey-8"/>
+  </q-item-section>
+  <q-item-section>
+    <q-item-label>Colaboradores</q-item-label>
+    </q-item-section>
+</q-item>
 
         <q-separator spaced />
 

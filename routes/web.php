@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,12 @@ Route::middleware('auth')->group(function () {
 
     // --- HOME / DASHBOARD ---
     Route::get('/', [DashboardController::class, 'index'])->name('home');
+
+    //USER
+    Route::get('/usuarios', [UserController::class, 'index'])->name('users.index');
+    Route::get('/usuarios/criar', [UserController::class, 'create'])->name('users.create');
+    Route::post('/usuarios', [UserController::class, 'store'])->name('users.store');
+    Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // --- EQUIPAMENTOS ---
     Route::get('/equipamentos', [EquipmentController::class, 'index'])->name('equipments.index');
