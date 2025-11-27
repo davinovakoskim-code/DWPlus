@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, router } from '@inertiajs/vue3'; 
 import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 
@@ -9,7 +9,7 @@ defineOptions({ layout: MainLayout });
 const $q = useQuasar();
 
 const props = defineProps({
-    equipment: Object, 
+    equipment: Object,
     locations: Array,
     departments: Array,
     groups: Array,
@@ -18,6 +18,7 @@ const props = defineProps({
 
 
 const form = useForm({
+    _method: 'put', 
     asset_code: props.equipment.asset_code,
     name: props.equipment.name,
     description: props.equipment.description,
@@ -26,8 +27,8 @@ const form = useForm({
     group_id: props.equipment.group_id,
     subgroup_id: props.equipment.subgroup_id,
     status: props.equipment.status,
-    attachment_filename: null, 
-    is_rented: Boolean(props.equipment.is_rented) 
+    attachment_filename: null,
+    is_rented: Boolean(props.equipment.is_rented)
 });
 
 const statusOptions = ['Disponível', 'Em Uso', 'Manutenção', 'Baixado'];
@@ -39,12 +40,13 @@ const filteredSubgroups = computed(() => {
 
 const submit = () => {
     
-    form.put(`/equipamentos/${props.equipment.id}`, {
+    form.post(`/equipamentos/${props.equipment.id}`, {
+        forceFormData: true,
         onSuccess: () => {
-            $q.notify({ type: 'positive', message: 'Patrimônio atualizado!' });
+            $q.notify({ type: 'positive', message: 'Patrimônio atualizado com sucesso!' });
         },
         onError: () => {
-            $q.notify({ type: 'negative', message: 'Erro ao atualizar.' });
+            $q.notify({ type: 'negative', message: 'Erro ao atualizar. Verifique os campos.' });
         }
     });
 };

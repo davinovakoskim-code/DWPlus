@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
-
-// --- VOLTANDO AO MODO ANTIGO ---
-// Usando os namespaces diretos conforme sua configuração original
 use Equipments\Equipment;
 use Equipments\EquipmentService;
 use Locations\Location;
 use Departments\Department;
 use EquipmentGroups\EquipmentGroup;
 use EquipmentSubgroups\EquipmentSubgroup;
-// -------------------------------
+
 
 class EquipmentController extends Controller
 {
@@ -70,11 +67,11 @@ class EquipmentController extends Controller
         $data['updated_by'] = auth()->id();
 
 
-        // Chama o serviço (usando o namespace antigo que funciona pra você)
+        
         $this->equipmentService->create($data);
 
 
-        // SEM DD AQUI. Redireciona para a listagem.
+        
         return redirect()->route('equipments.index')->with('message', 'Equipamento cadastrado com sucesso!');
     }
 

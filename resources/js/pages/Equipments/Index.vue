@@ -40,7 +40,7 @@ const getStatusColor = (status) => {
     return 'grey';
 };
 
-// Função para Deletar
+
 const deleteItem = (id) => {
     $q.dialog({
         title: 'Atenção',
