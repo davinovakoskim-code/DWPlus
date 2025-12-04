@@ -1,5 +1,5 @@
 <script setup>
-import { useForm, usePage } from '@inertiajs/vue3';
+import { Head, useForm, usePage } from '@inertiajs/vue3';
 
 
 const page = usePage();
@@ -37,6 +37,8 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Login" />
+
     <div class="fullscreen flex flex-center bg-grey-2">
         <q-card class="login-card no-shadow column" bordered>
             <q-card-section class="header-section row justify-between items-center q-py-lg q-px-xl">

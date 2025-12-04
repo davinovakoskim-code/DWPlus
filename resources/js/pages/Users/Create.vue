@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { useForm, router } from '@inertiajs/vue3';
+import { Head, useForm, router } from '@inertiajs/vue3';
 import { useQuasar } from 'quasar';
 
 defineOptions({ layout: MainLayout });
@@ -27,6 +27,8 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Novo Colaborador" />
+    
     <q-page class="q-pa-md">
         <div class="row items-center justify-between q-mb-md">
             <div>

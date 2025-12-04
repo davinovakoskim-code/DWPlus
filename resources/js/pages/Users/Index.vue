@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { router, usePage } from '@inertiajs/vue3';
+import { Head, router, usePage } from '@inertiajs/vue3';
 import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 
@@ -35,6 +35,8 @@ const deleteItem = (id) => {
 </script>
 
 <template>
+    <Head title="Colaboradores" />
+
     <q-page class="q-pa-md">
         <div class="row items-center justify-between q-mb-md">
             <div>

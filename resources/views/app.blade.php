@@ -4,10 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel + Quasar</title>
+    <link rel="icon" type="image/png" href="/img/LOGOO.png">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+    <title inertia>Dwplus Patrimônios</title>
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    @routes
+    @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead
 </head>
 <body>

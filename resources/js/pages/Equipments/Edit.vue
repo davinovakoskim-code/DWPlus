@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { useForm, router } from '@inertiajs/vue3'; 
+import { Head, useForm, router } from '@inertiajs/vue3'; 
 import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 
@@ -53,6 +53,7 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Editar" />
     <q-page class="q-pa-md">
         <div class="row items-center justify-between q-mb-md">
             <div>

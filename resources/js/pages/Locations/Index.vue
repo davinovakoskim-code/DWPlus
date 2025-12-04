@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { router } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import { useQuasar } from 'quasar';
 
 defineOptions({ layout: MainLayout });
@@ -27,6 +27,8 @@ const deleteItem = (id) => {
 </script>
 
 <template>
+    <Head title="Gestão de Locais" />
+
     <q-page class="q-pa-md">
         <div class="row items-center justify-between q-mb-md">
             <div>

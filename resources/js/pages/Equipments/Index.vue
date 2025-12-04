@@ -2,7 +2,7 @@
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 
 defineOptions({ layout: MainLayout });
 
@@ -80,6 +80,8 @@ const customFilter = (rows, terms, cols, getCellValue) => {
 </script>
 
 <template>
+    <Head title="Inventário de Patrimônios" />
+    
     <q-page class="q-pa-md">
 
         <div class="row items-center justify-between q-mb-md">
